@@ -41,6 +41,16 @@ class _MyHomePageState extends State<MyHomePage> {
           children: const [
             NumberHolder(content: "one"),
             IncrementalNumberHolder(),
+            IncrementalNumberHolder(),
+            IncrementalNumberHolder(),
+            IncrementalNumberHolder(),
+            IncrementalNumberHolder(),
+            IncrementalNumberHolder(),
+            IncrementalNumberHolder(),
+            IncrementalNumberHolder(),
+            IncrementalNumberHolder(),
+            Text("This Hold the total of all the values "),
+            NumberHolder(content: 1),
           ],
         ));
   }
