@@ -56,3 +56,18 @@ class NumberHolder extends StatelessWidget {
         child: Text("$content", textAlign: TextAlign.center));
   }
 }
+
+class IncrementalNumberHolder extends StatelessWidget {
+  final int startval;
+  const IncrementalNumberHolder({Key? key, this.startval = 0})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.symmetric(vertical: 0),
+        padding: const EdgeInsets.all(4),
+        width: double.infinity,
+        color: Colors.orangeAccent,
+        child: Text("$startval", textAlign: TextAlign.center));
+  }
+}
