@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable
+// ignore_for_file: prefer_const_constructors, unused_local_variable, non_constant_identifier_names
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:review_mobiledev1/safe_cracker_widget/safe_dial.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,62 +20,136 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const SafeCracker(title: 'Lockpick UI'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class SafeCracker extends StatefulWidget {
+  const SafeCracker({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SafeCracker> createState() => _SafeCrackerState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SafeCrackerState extends State<SafeCracker> {
   List<int> values = [0, 0, 0];
-
+  String combination = "420";
+  String feedback = "";
+  bool isUnlocked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.orange,
         appBar: AppBar(
           title: const Text("Lockpicker"),
         ),
-        body: Container(
-          constraints: const BoxConstraints(minHeight: 120),
-          child: Row(
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (int i = 0; i < values.length; i++)
-                SafeDial(
-                  startval: values[i],
-                  onInc: () {
-                    setState(() {
-                      if (values[i] < 9) {
-                        values[i]++;
-                      }
-                    });
-                  },
-                  onDec: () {
-                    setState(() {
-                      if (values[i] > 0) {
-                        values[i]--;
-                      }
-                    });
-                  },
+              Icon(
+                  isUnlocked
+                      ? CupertinoIcons.lock_open_fill
+                      : CupertinoIcons.lock_fill,
+                  size: 128,
+                  color: isUnlocked ? Colors.green : Colors.redAccent),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 32),
+                height: 140,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < values.length; i++)
+                      SafeDial(
+                        startval: values[i],
+                        onInc: () {
+                          setState(() {
+                            if (values[i] < 9) {
+                              values[i]++;
+                            }
+                          });
+                        },
+                        onDec: () {
+                          setState(() {
+                            if (values[i] > 0) {
+                              values[i]--;
+                            }
+                          });
+                        },
+                      ),
+                  ],
                 ),
-              // Text("This Hold the total of all the values "),
-              // GestureDetector(
-              //     onTap: () {
-              //       setState(() {
-              //         values = [0, 0, 0];
-              //       });
-              //     },
-              //     child: NumberHolder(content: sumOfAllValues(values))),
+              ),
+              if (feedback.isNotEmpty)
+                Text(
+                  feedback,
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: isUnlocked ? Colors.green : Colors.red),
+                ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 32),
+                child: TextButton(
+                    onPressed: () {
+                      UnlockSafe();
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.all(32),
+                        color: isUnlocked ? Colors.green : Colors.red,
+                        child: Text("Open the Safe",
+                            style: TextStyle(
+                                color: isUnlocked
+                                    ? Colors.white
+                                    : Colors.black)))),
+              ),
             ],
           ),
         ));
+  }
+
+  // ResetSafe() {
+  //   setState(() {
+  //     String feedback = "";
+  //     bool isUnlocked = false;
+  //     List<int> values = [0, 0, 0];
+  //   });
+  // } was trying a reset function but didnt work in the meantime
+
+  UnlockSafe() {
+    if (checkCombo()) {
+      setState(
+        () {
+          isUnlocked = true;
+          feedback = "Safe is Unlocked!";
+        },
+      );
+    } else {
+      setState(
+        () {
+          isUnlocked = false;
+          feedback = "Safe not Unlocked!";
+        },
+      );
+    }
+  }
+
+  bool checkCombo() {
+    String theCurrentValue = convertValuestoConvertableString(values);
+    bool isUnlocked = (theCurrentValue == combination);
+    return isUnlocked;
+  }
+
+  String convertValuestoConvertableString(List<int> val) {
+    String temp = "";
+    for (int v in val) {
+      temp += "$v";
+    }
+    return temp;
   }
 
   int sumOfAllValues(List<int> list) {
@@ -104,31 +179,7 @@ class NumberHolder extends StatelessWidget {
   }
 }
 
-class SafeDial extends StatelessWidget {
-  final int startval;
-  final Function()? onInc;
-  final Function()? onDec;
-  const SafeDial({Key? key, required this.startval, this.onInc, this.onDec})
-      : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(10),
-      color: Colors.orangeAccent,
-      child: Column(
-        children: [
-          IconButton(
-              onPressed: onInc, icon: const Icon(CupertinoIcons.chevron_up)),
-          Expanded(child: Text("$startval", textAlign: TextAlign.center)),
-          IconButton(
-              onPressed: onDec, icon: const Icon(CupertinoIcons.chevron_down)),
-        ],
-      ),
-    );
-  }
-}
 
 //JUNK CODE / OLD CODE
 /*
