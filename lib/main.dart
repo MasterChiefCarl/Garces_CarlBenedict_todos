@@ -59,7 +59,7 @@ class _SafeCrackerState extends State<SafeCracker> {
                   color: isUnlocked ? Colors.green : Colors.redAccent),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 32),
-                height: 140,
+                height: 150,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
