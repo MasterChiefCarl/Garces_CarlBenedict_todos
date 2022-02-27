@@ -42,8 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text("Lockpicker"),
         ),
-        body: SizedBox(
-          height: 120,
+        body: Container(
+          constraints: const BoxConstraints(minHeight: 120),
           child: Row(
             children: [
               for (int i = 0; i < values.length; i++)
@@ -121,14 +121,12 @@ class SafeDial extends StatelessWidget {
         children: [
           IconButton(
               onPressed: onInc, icon: const Icon(CupertinoIcons.chevron_up)),
-          Expanded(
-              flex: 3, child: Text("$startval", textAlign: TextAlign.center)),
+          Expanded(child: Text("$startval", textAlign: TextAlign.center)),
           IconButton(
               onPressed: onDec, icon: const Icon(CupertinoIcons.chevron_down)),
         ],
       ),
     );
-    ;
   }
 }
 
