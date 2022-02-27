@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -33,37 +34,46 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<int> values = [1, 2, 3, 4, 5];
+  List<int> values = [0, 0, 0];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("ELEC 2B REVIEW"),
+          title: const Text("Lockpicker"),
         ),
-        body: Column(
-          children: [
-            for (int i = 0; i < values.length; i++)
-              IncrementalNumberHolderStl(
-                startval: values[i],
-                onInc: () {
-                  setState(() {
-                    values[i]++;
-                  });
-                },
-                onDec: () {
-                  setState(() {
-                    values[i]--;
-                  });
-                },
-              ),
-            Text("This Hold the total of all the values "),
-            GestureDetector(
-              onTap: () {setState((){
-                values = [0,0,0,0,0];
-              });},
-                child: NumberHolder(content: sumOfAllValues(values))),
-          ],
+        body: SizedBox(
+          height: 120,
+          child: Row(
+            children: [
+              for (int i = 0; i < values.length; i++)
+                SafeDial(
+                  startval: values[i],
+                  onInc: () {
+                    setState(() {
+                      if (values[i] < 9) {
+                        values[i]++;
+                      }
+                    });
+                  },
+                  onDec: () {
+                    setState(() {
+                      if (values[i] > 0) {
+                        values[i]--;
+                      }
+                    });
+                  },
+                ),
+              // Text("This Hold the total of all the values "),
+              // GestureDetector(
+              //     onTap: () {
+              //       setState(() {
+              //         values = [0, 0, 0];
+              //       });
+              //     },
+              //     child: NumberHolder(content: sumOfAllValues(values))),
+            ],
+          ),
         ));
   }
 
@@ -94,12 +104,11 @@ class NumberHolder extends StatelessWidget {
   }
 }
 
-class IncrementalNumberHolderStl extends StatelessWidget {
+class SafeDial extends StatelessWidget {
   final int startval;
   final Function()? onInc;
   final Function()? onDec;
-  const IncrementalNumberHolderStl(
-      {Key? key, required this.startval, this.onInc, this.onDec})
+  const SafeDial({Key? key, required this.startval, this.onInc, this.onDec})
       : super(key: key);
 
   @override
@@ -107,13 +116,15 @@ class IncrementalNumberHolderStl extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.all(10),
-      width: double.infinity,
       color: Colors.orangeAccent,
-      child: Row(
+      child: Column(
         children: [
-          IconButton(onPressed: onDec, icon: const Icon(Icons.chevron_left)),
-          Expanded(child: Text("$startval", textAlign: TextAlign.center)),
-          IconButton(onPressed: onInc, icon: const Icon(Icons.chevron_right)),
+          IconButton(
+              onPressed: onInc, icon: const Icon(CupertinoIcons.chevron_up)),
+          Expanded(
+              flex: 3, child: Text("$startval", textAlign: TextAlign.center)),
+          IconButton(
+              onPressed: onDec, icon: const Icon(CupertinoIcons.chevron_down)),
         ],
       ),
     );
