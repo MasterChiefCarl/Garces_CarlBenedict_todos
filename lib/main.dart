@@ -43,16 +43,26 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Column(
           children: [
-            for (int value in values)
-              IncrementalNumberHolder(
-                  startval: value,
-                  onUpdate: (int v) {
-                    setState(() {
-                      value = v;
-                    });
-                  }),
+            for (int i = 0; i < values.length; i++)
+              IncrementalNumberHolderStl(
+                startval: values[i],
+                onInc: () {
+                  setState(() {
+                    values[i]++;
+                  });
+                },
+                onDec: () {
+                  setState(() {
+                    values[i]--;
+                  });
+                },
+              ),
             Text("This Hold the total of all the values "),
-            NumberHolder(content: sumOfAllValues(values)),
+            GestureDetector(
+              onTap: () {setState((){
+                values = [0,0,0,0,0];
+              });},
+                child: NumberHolder(content: sumOfAllValues(values))),
           ],
         ));
   }
@@ -77,10 +87,42 @@ class NumberHolder extends StatelessWidget {
         constraints: const BoxConstraints(minHeight: 60),
         width: double.infinity,
         color: Colors.orangeAccent,
-        child: Text("$content", textAlign: TextAlign.center));
+        child: Text(
+          "$content",
+          textAlign: TextAlign.center,
+        ));
   }
 }
 
+class IncrementalNumberHolderStl extends StatelessWidget {
+  final int startval;
+  final Function()? onInc;
+  final Function()? onDec;
+  const IncrementalNumberHolderStl(
+      {Key? key, required this.startval, this.onInc, this.onDec})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.all(10),
+      width: double.infinity,
+      color: Colors.orangeAccent,
+      child: Row(
+        children: [
+          IconButton(onPressed: onDec, icon: const Icon(Icons.chevron_left)),
+          Expanded(child: Text("$startval", textAlign: TextAlign.center)),
+          IconButton(onPressed: onInc, icon: const Icon(Icons.chevron_right)),
+        ],
+      ),
+    );
+    ;
+  }
+}
+
+//JUNK CODE / OLD CODE
+/*
 class IncrementalNumberHolder extends StatefulWidget {
   final Function(int) onUpdate;
   final int startval;
@@ -132,3 +174,4 @@ class _IncrementalNumberHolderState extends State<IncrementalNumberHolder> {
     );
   }
 }
+*/
