@@ -12,7 +12,7 @@ class FinalScreen extends StatelessWidget {
         centerTitle: true,
         title: OutlinedButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.yellow),
+            backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
           ),
           onPressed: () {
             Navigator.of(context).popUntil((route) => route.isFirst);

@@ -28,26 +28,8 @@ class _DoorLockScreenState extends State<DoorLockScreen> {
                   ? CupertinoIcons.lock_open_fill
                   : CupertinoIcons.lock_fill,
               size: 128,
-              color: !isUnlocked ? Colors.redAccent : Colors.green,
+              color: Colors.redAccent,
             ),
-            !isUnlocked
-                ? Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    padding: const EdgeInsets.symmetric(horizontal: 80),
-                    child: const Text(
-                        "Try breaking the Lock. Hint: Its a noice number ( ͡° ͜ʖ ͡°)",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                  )
-                : Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    padding: const EdgeInsets.symmetric(horizontal: 80),
-                    child: const Text("( ͡° ͜ʖ ͡°) Noice",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
-                  ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 32),
               height: 130,
@@ -60,7 +42,7 @@ class _DoorLockScreenState extends State<DoorLockScreen> {
                       setState(() {
                         if (values[i] < 9) {
                           if (!isUnlocked) feedback = '';
-                          if (!isUnlocked) values[i]++;
+                          values[i]++;
                         }
                       });
                     },
@@ -68,7 +50,7 @@ class _DoorLockScreenState extends State<DoorLockScreen> {
                       setState(() {
                         if (values[i] > 0) {
                           if (!isUnlocked) feedback = '';
-                          if (!isUnlocked) values[i]--;
+                          values[i]--;
                         }
                       });
                     },
@@ -78,9 +60,7 @@ class _DoorLockScreenState extends State<DoorLockScreen> {
             if (feedback.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(feedback,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold)),
+                child: Text(feedback),
               ),
             if (!isUnlocked)
               OutlinedButton(

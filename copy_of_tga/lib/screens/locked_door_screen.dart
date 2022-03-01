@@ -16,8 +16,7 @@ class _LockedDoorScreenState extends State<LockedDoorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            "This door is currently ${isUnlocked ? 'unlocked' : 'locked'}"),
+        title: Text("You see a ${isUnlocked ? 'unlocked' : 'locked'} door"),
         centerTitle: true,
       ),
       body: SafeArea(

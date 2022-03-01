@@ -19,25 +19,13 @@ class StartScreen extends StatelessWidget {
               Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   margin: const EdgeInsets.symmetric(vertical: 32),
-                  child: Column(
-                    children: const [
-                      Text(
-                        "Welcome to the app!",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 32,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        " I am the narrator! Here in this app I will walk you through this app.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
+                  child: const Text(
+                    "Sometimes the thing the IT Students Needs",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 32,
+                      color: Colors.white,
+                    ),
                   )),
               OutlinedButton(
                   style: ButtonStyle(
@@ -50,15 +38,7 @@ class StartScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text("What is it?")),
-              // const Text(
-              //   "This was meant to be a joke. Please dont take it seriously",
-              //   textAlign: TextAlign.center,
-              //   style: TextStyle(
-              //     fontSize: 16,
-              //     color: Colors.white,
-              //   ),
-              // )
+                  child: const Text("What is it?"))
             ],
           ),
         ),

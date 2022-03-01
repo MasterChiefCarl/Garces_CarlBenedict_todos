@@ -16,11 +16,11 @@ class SafeDial extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.all(4),
-        padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.all(10),
         color: Colors.orangeAccent,
-        constraints: const BoxConstraints(minHeight: 60),
+        constraints: const BoxConstraints(minHeight: 80),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
               onPressed: onIncrement,

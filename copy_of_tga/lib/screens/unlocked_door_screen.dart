@@ -103,10 +103,6 @@ class _PlayerNameInputState extends State<PlayerNameInput> {
               margin: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 children: [
-                  const Text("I am ....",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   TextFormField(
                     textAlign: TextAlign.center,
                     textCapitalization: TextCapitalization.words,
@@ -115,14 +111,10 @@ class _PlayerNameInputState extends State<PlayerNameInput> {
                     controller: controller,
                   ),
                   if (status.isNotEmpty)
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
-                      child: Text(status,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold)),
-                    ),
+                    Text(status,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
