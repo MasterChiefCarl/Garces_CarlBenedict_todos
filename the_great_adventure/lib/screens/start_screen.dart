@@ -17,9 +17,10 @@ class StartScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   margin: const EdgeInsets.symmetric(vertical: 32),
                   child: const Text(
-                    "Welcome to Nav 1.0 Activity!",
+                    "Sometimes the thing the IT Students Needs",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 32,
@@ -37,7 +38,7 @@ class StartScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text("Let's go!"))
+                  child: const Text("What is it?"))
             ],
           ),
         ),
