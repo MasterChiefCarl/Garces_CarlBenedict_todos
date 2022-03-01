@@ -44,6 +44,7 @@ class _UnlockedDoorScreenState extends State<UnlockedDoorScreen> {
                     ),
                     onPressed: () async {
                       String? player = await showDialog(
+                          barrierDismissible: false,
                           context: context,
                           builder: (BuildContext dialogContext) {
                             return const PlayerNameInput();
@@ -79,6 +80,8 @@ class PlayerNameInput extends StatefulWidget {
 
 class _PlayerNameInputState extends State<PlayerNameInput> {
   TextEditingController controller = TextEditingController();
+
+  String status = '';
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -86,19 +89,59 @@ class _PlayerNameInputState extends State<PlayerNameInput> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Please enter your name"),
-            TextFormField(
-              controller: controller,
-            ),
-            OutlinedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
+            Container(
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: const Text("The Narrator want to know your name",
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold))),
+            Container(
+              padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                children: [
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    textCapitalization: TextCapitalization.words,
+                    cursorColor: Colors.black,
+                    cursorHeight: 20,
+                    controller: controller,
+                  ),
+                  if (status.isNotEmpty)
+                    Text(status,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold)),
+                ],
               ),
-              onPressed: () {
-                Navigator.of(context).pop(controller.text);
-              },
-              child: const Text("Proceed"),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              child: OutlinedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                ),
+                onPressed: () {
+                  if (controller.text.isNotEmpty) {
+                    Navigator.of(context).pop(controller.text);
+                  } else {
+                    if (mounted) {
+                      setState(() {
+                        status =
+                            "Please Input Your Name. Click Proceed when done";
+                      });
+                    }
+                  }
+                },
+                child: const Text(
+                  "Proceed",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
           ],
         ),

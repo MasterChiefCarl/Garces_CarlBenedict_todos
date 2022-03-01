@@ -40,14 +40,18 @@ class _DoorLockScreenState extends State<DoorLockScreen> {
                     startingValue: values[i],
                     onIncrement: () {
                       setState(() {
-                        if (!isUnlocked) feedback = '';
-                        values[i]++;
+                        if (values[i] < 9) {
+                          if (!isUnlocked) feedback = '';
+                          values[i]++;
+                        }
                       });
                     },
                     onDecrement: () {
                       setState(() {
-                        if (!isUnlocked) feedback = '';
-                        values[i]--;
+                        if (values[i] > 0) {
+                          if (!isUnlocked) feedback = '';
+                          values[i]--;
+                        }
                       });
                     },
                   ),

@@ -31,10 +31,16 @@ class FinalScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).size.height * 0.10),
-            child: Text(
-              "You made it outside $player, congratulations!",
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white, fontSize: 32),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              margin: const EdgeInsets.symmetric(vertical: 5),
+              decoration:
+                  const BoxDecoration(color: Color.fromRGBO(0, 0, 0, .75)),
+              child: Text(
+                "You made it outside $player, congratulations! Go enjoy your day!",
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.white, fontSize: 32),
+              ),
             ),
           ),
         ),
