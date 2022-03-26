@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-
   HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -42,9 +41,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             leading: Text(todo.id.toString()),
                             title: Text(todo.created.toString()),
                             subtitle: Text(todo.details),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () {},
+                            trailing: Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () {},
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete,
+                                  color: Colors.redAccent,),
+                                  onPressed: () {},
+                                )
+                              
+                              ],
                             ))
                     ]))),
             Flexible(
@@ -68,13 +77,20 @@ class _HomeScreenState extends State<HomeScreen> {
     if (todos.isEmpty) todos.add(Todo(details: details, id: index));
   }
 
-  removeTodo(int id){
-    if (todos.isNotEmpty)
-    {for (int i= 0; i <todos.length; i++){
-      if (id == todos[1].id){
-        todos.removeAt(i);
+  removeTodo(int id) {
+    if (todos.isNotEmpty) {
+      for (int i = 0; i < todos.length; i++) {
+        if (id == todos[1].id) {
+          todos.removeAt(i);
+        }
       }
-    }}
+    }
+  }
+
+  editTodo(String details, int id){
+    for (int i=0; i<todos.length; i++) {
+      if (id )
+    }
   }
 }
 
