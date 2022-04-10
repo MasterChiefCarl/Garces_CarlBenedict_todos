@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+import 'package:todo_app/src/models/todo_model.dart';
+
+class DeleteWidget extends StatelessWidget {
+  final Todo todo;
+  final Function()? Delete;
+  f
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text("Deleting Note"),
+      content: Text(
+          "Would you like to continue learning how to use Flutter alerts?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+  }
+}
